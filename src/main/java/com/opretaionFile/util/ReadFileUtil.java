@@ -175,8 +175,7 @@ public class ReadFileUtil {
 	}
 	
 	public void readPropertiesFile() {
-		String relativelyPath=System.getProperty("user.dir");
-		String propertiesFilePath = relativelyPath + ConfigConstants.CONFIGU_FILE_PATH;
+		String propertiesFilePath = System.getProperty("user.dir") + ConfigConstants.CONFIGU_FILE_PATH;
 
 		File config = findFile(propertiesFilePath);
 		
@@ -197,8 +196,6 @@ public class ReadFileUtil {
 				}
 			}
 			
-//			System.out.println("read file path : " + read_file_path );
-//			System.out.println("result file path : " + result_file_path);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -208,7 +205,7 @@ public class ReadFileUtil {
 	
 	public void copySheetAsTemplate(File mergeFile, Map<Integer, String> dataMap) {
 		FileInputStream read = null;
-		FileOutputStream write = null;
+		FileOutputStream out = null;
 		HSSFWorkbook workbook = null;
 		
 		Entry<Integer, String> sheetEntry = null;
@@ -226,14 +223,14 @@ public class ReadFileUtil {
 				sheetEntry = iterator.next();
 				workbook.cloneSheet(ConfigConstants.TEMPALTE_SHEET_INDEX);
 				sheetName = ConfigConstants.PRE_SHEET_NAME + sheetEntry.getValue();
-				workbook.setSheetName(sheetEntry.getKey(), sheetName);
+				workbook.setSheetName(sheetEntry.getKey() + 1, sheetName);
 				
 				System.out.println("copy finish :  sheet index: " + sheetEntry.getKey()  + " - [" + sheetName + "]");
 			}
-			write = new FileOutputStream(mergeFile);
-			workbook.write(write);
+			out = new FileOutputStream(mergeFile);
+			workbook.write(out);
 			workbook.close();
-			write.close();
+			out.close();
 		} catch (EncryptedDocumentException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
