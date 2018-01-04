@@ -25,10 +25,9 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import com.operationFile.constants.ConfigConstants;
 
-public class ReadFile {
+public class ReadFileUtil {
 
 	private static boolean IS_FILE_EXIST = false;
-	private static String EMPTY_VALUE = "--";
 	public String read_file_path;
 	public String result_file_path;
 	public String template_file_path;
@@ -38,12 +37,12 @@ public class ReadFile {
 	public static final String KEY_STRING = "KEY";
 	public static final String VALUE_STRING = "VALUE";
 	
-	private static ReadFile readFile;
-	private ReadFile(){};
+	private static ReadFileUtil readFile;
+	private ReadFileUtil(){};
 	
-	public static ReadFile getInstance() {
+	public static ReadFileUtil getInstance() {
 		if(readFile == null) 
-			readFile = new ReadFile();
+			readFile = new ReadFileUtil();
 		return readFile;
 	}
 	
@@ -158,7 +157,7 @@ public class ReadFile {
 				}
 				
 				if(isValueCellEmpty || null == valueCell) {
-					sheetDataMap.put(key, EMPTY_VALUE);
+					sheetDataMap.put(key, ConfigConstants.EMPTY_VALUE);
 //					System.out.println(key + " " + EMPTY_VALUE);
 				} else {
 					sheetDataMap.put(key, value);
@@ -177,7 +176,7 @@ public class ReadFile {
 	
 	public void readPropertiesFile() {
 		String relativelyPath=System.getProperty("user.dir");
-		String propertiesFilePath = relativelyPath + "/resource/config.properties";
+		String propertiesFilePath = relativelyPath + ConfigConstants.CONFIGU_FILE_PATH;
 
 		File config = findFile(propertiesFilePath);
 		
@@ -207,24 +206,29 @@ public class ReadFile {
 		}
 	}
 	
-	public void copySheetAsTemplate(File templateFile, File mergeFile, Map<Integer, String> dataMap) {
+	public void copySheetAsTemplate(File mergeFile, Map<Integer, String> dataMap) {
 		FileInputStream read = null;
 		FileOutputStream write = null;
 		HSSFWorkbook workbook = null;
 		
+		Entry<Integer, String> sheetEntry = null;
+		String sheetName = null;
+		
 		try {
-			read = new FileInputStream(templateFile);
+			read = new FileInputStream(mergeFile);
 			workbook = (HSSFWorkbook) WorkbookFactory.create(read);
 			read.close();
 			
 			//create sheet
 			Iterator<Entry<Integer, String>> iterator = dataMap.entrySet().iterator();
 			
-			Entry<Integer, String> sheetEntry = null;
-			
 			while(iterator.hasNext()) {
 				sheetEntry = iterator.next();
-				workbook.cloneSheet(0);
+				workbook.cloneSheet(ConfigConstants.TEMPALTE_SHEET_INDEX);
+				sheetName = ConfigConstants.PRE_SHEET_NAME + sheetEntry.getValue();
+				workbook.setSheetName(sheetEntry.getKey(), sheetName);
+				
+				System.out.println("copy finish :  sheet index: " + sheetEntry.getKey()  + " - [" + sheetName + "]");
 			}
 			write = new FileOutputStream(mergeFile);
 			workbook.write(write);

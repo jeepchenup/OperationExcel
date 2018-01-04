@@ -13,22 +13,22 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.opretaionFile.util.ReadFile;
+import com.opretaionFile.util.ReadFileUtil;
 
-public class TestReadFile {
+public class TestReadFileUtil {
 
 	private File readFile = null;
 	private File updateFile = null;
 	private File templateFile = null;
-	private ReadFile instance = null;
+	private ReadFileUtil instance = null;
 
 	@Before
 	public void setConfiguration() throws EncryptedDocumentException, InvalidFormatException, IOException {
-		instance = ReadFile.getInstance();
+		instance = ReadFileUtil.getInstance();
 		instance.readPropertiesFile();
-		updateFile = ReadFile.findFile(instance.result_file_path);
-		readFile = ReadFile.findFile(instance.read_file_path);
-		templateFile = ReadFile.findFile(instance.template_file_path);
+		updateFile = ReadFileUtil.findFile(instance.result_file_path);
+		readFile = ReadFileUtil.findFile(instance.read_file_path);
+		templateFile = ReadFileUtil.findFile(instance.template_file_path);
 	}
 
 	@Test
@@ -77,6 +77,6 @@ public class TestReadFile {
 		Map<Integer, String> dataMap = instance.getSheetInfoOfWorkbook(workbook);
 		workbook.close();
 		
-		instance.copySheetAsTemplate(templateFile, updateFile, dataMap);
+		instance.copySheetAsTemplate(updateFile, dataMap);
 	}
 }

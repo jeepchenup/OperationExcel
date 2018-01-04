@@ -7,4 +7,12 @@ public class ConfigConstants {
 	public static final String RESULT_FILE_PATH = "result_file_path";
 	
 	public static final String TEMPLATE_FILE_PATH = "template_file_path";
+	
+	public static final int TEMPALTE_SHEET_INDEX = 0;
+	
+	public static final String PRE_SHEET_NAME = "比率趋势分析表 - ";
+	
+	public static final String CONFIGU_FILE_PATH = "/resource/config.properties";
+	
+	public static final String EMPTY_VALUE = "--";
 }
