@@ -211,14 +211,11 @@ public class ReadFile {
 		FileInputStream read = null;
 		FileOutputStream write = null;
 		HSSFWorkbook workbook = null;
-//		Sheet templateSheet = null;
 		
 		try {
 			read = new FileInputStream(templateFile);
 			workbook = (HSSFWorkbook) WorkbookFactory.create(read);
 			read.close();
-			//The first sheet in the workbook is used as template sheet
-//			templateSheet = workbook.getSheetAt(0);
 			
 			//create sheet
 			Iterator<Entry<Integer, String>> iterator = dataMap.entrySet().iterator();
@@ -238,10 +235,8 @@ public class ReadFile {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (InvalidFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
