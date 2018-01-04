@@ -2,7 +2,6 @@ package com.oprataionFile.util;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 
@@ -61,7 +60,7 @@ public class TestReadFileUtil {
 	public void testReadXLSFileAsMap() throws IOException {
 		Map<Object, Object> map = instance.readXLSFileAsMap(readFile);
 		Map mps = (Map) map.get("协鑫新能源");
-//		System.out.println(mps);
+		System.out.println(mps);
 	}
 	
 	@Test

@@ -15,4 +15,8 @@ public class ConfigConstants {
 	public static final String CONFIGU_FILE_PATH = "/resource/config.properties";
 	
 	public static final String EMPTY_VALUE = "--";
+	
+	public static final String KEY_COLUMN_INDEX = "key_column_index";
+	
+	public static final String VALUE_COLUMN_INDEX = "value_column_index";
 }

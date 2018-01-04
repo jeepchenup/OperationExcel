@@ -32,8 +32,8 @@ public class ReadFileUtil {
 	public String result_file_path;
 	public String template_file_path;
 
-	public static int KEY_COLUMN_INDEX = 0;
-	public static int VALUE_COLUMN_INDEX = 1;
+	public static int KEY_COLUMN_INDEX ;
+	public static int VALUE_COLUMN_INDEX ;
 	public static final String KEY_STRING = "KEY";
 	public static final String VALUE_STRING = "VALUE";
 	
@@ -187,12 +187,16 @@ public class ReadFileUtil {
 				Iterator<String> iterator = prop.stringPropertyNames().iterator();
 				while(iterator.hasNext()) {
 					String key = iterator.next();
-					if(key.equals(ConfigConstants.READ_FILE_PATH))
+					if(ConfigConstants.READ_FILE_PATH.equals(key))
 						read_file_path = prop.getProperty(key);
-					if(key.equals(ConfigConstants.RESULT_FILE_PATH))
+					else if(ConfigConstants.RESULT_FILE_PATH.equals(key))
 						result_file_path = prop.getProperty(key);
-					if(key.equals(ConfigConstants.TEMPLATE_FILE_PATH))
+					else if(ConfigConstants.TEMPLATE_FILE_PATH.equals(key))
 						template_file_path = prop.getProperty(key);
+					else if(ConfigConstants.KEY_COLUMN_INDEX.equals(key))
+						KEY_COLUMN_INDEX = Integer.parseInt((String) prop.get(key));
+					else if(ConfigConstants.VALUE_COLUMN_INDEX.equals(key))
+						VALUE_COLUMN_INDEX = Integer.parseInt((String) prop.get(key));
 				}
 			}
 			
