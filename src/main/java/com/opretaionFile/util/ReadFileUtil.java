@@ -67,7 +67,7 @@ public class ReadFileUtil {
 		return isEmpty;
 	}
 	
-	public void updateXLSFile(File file) throws EncryptedDocumentException, InvalidFormatException, IOException{
+	public void updateXLSFile(File file, Map<String, Map<Integer, String>> maps) throws EncryptedDocumentException, InvalidFormatException, IOException{
 		
 		FileInputStream read = null;
 		FileOutputStream out = null;
@@ -229,12 +229,14 @@ public class ReadFileUtil {
 				sheetName = ConfigConstants.PRE_SHEET_NAME + sheetEntry.getValue();
 				workbook.setSheetName(sheetEntry.getKey() + 1, sheetName);
 				
-				System.out.println("copy finish :  sheet index: " + sheetEntry.getKey()  + " - [" + sheetName + "]");
+				System.out.println(">>>copy finish :  sheet index: " + sheetEntry.getKey()  + " - [" + sheetName + "]");
 			}
 			out = new FileOutputStream(mergeFile);
 			workbook.write(out);
 			workbook.close();
 			out.close();
+			
+			System.out.println("\n>>>finish copy!");
 		} catch (EncryptedDocumentException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {

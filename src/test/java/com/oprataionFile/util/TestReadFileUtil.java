@@ -37,7 +37,7 @@ public class TestReadFileUtil {
 	
 	@Test
 	public void testUpdateXLSFile() throws EncryptedDocumentException, InvalidFormatException, IOException {
-		instance.updateXLSFile(updateFile);
+		instance.updateXLSFile(updateFile, null);
 	}
 	
 	@Test
