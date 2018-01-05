@@ -41,6 +41,8 @@ public class ReadFileUtil {
 
 	public static int KEY_COLUMN_INDEX ;
 	public static int VALUE_COLUMN_INDEX ;
+	public static String UNREAD_ROW_SET;
+	public static int READ_COLUMN_INDEX;
 	
 	private static ReadFileUtil readFile;
 	private ReadFileUtil(){};
@@ -223,6 +225,10 @@ public class ReadFileUtil {
 						KEY_COLUMN_INDEX = Integer.parseInt((String) prop.get(key));
 					else if(ConfigConstants.VALUE_COLUMN_INDEX.equals(key))
 						VALUE_COLUMN_INDEX = Integer.parseInt((String) prop.get(key));
+					else if(ConfigConstants.UNREAD_ROW_SET.equals(key))
+						UNREAD_ROW_SET = prop.getProperty(key);
+					else if(ConfigConstants.READ_COLUMN_INDEX.equals(key))
+						READ_COLUMN_INDEX = Integer.parseInt(prop.getProperty(key));
 				}
 			}
 			

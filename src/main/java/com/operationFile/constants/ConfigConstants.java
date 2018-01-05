@@ -15,4 +15,8 @@ public class ConfigConstants {
 	public static final String KEY_COLUMN_INDEX = "key_column_index";
 	
 	public static final String VALUE_COLUMN_INDEX = "value_column_index";
+	
+	public static final String UNREAD_ROW_SET = "unread_row_set";
+	
+	public static final String READ_COLUMN_INDEX = "read_column_index";
 }
