@@ -30,22 +30,12 @@ import com.operationFile.model.Config;
 /**
  * 
  * @author steven.chen
- * @version 0.1
+ * @version 0.2
  *
  */
 public class ReadFileUtil {
 
-	private static boolean IS_FILE_EXIST = false;
 	private Config innerConfig;
-//	public String read_file_path;
-//	public String result_file_path;
-//	public String template_file_path;
-
-//	public static int KEY_COLUMN_INDEX ;
-//	public static int VALUE_COLUMN_INDEX ;
-//	public static String UNREAD_ROW_SET;
-//	public static int READ_COLUMN_INDEX;
-//	public static int READ_SHEET_INDEX;
 	
 	private static ReadFileUtil readFile;
 	private ReadFileUtil(){};
@@ -58,10 +48,7 @@ public class ReadFileUtil {
 	
 	public static File findFile(String path) {
 		File file = new File(path);
-		
-		IS_FILE_EXIST = file.exists();
-		
-		if(IS_FILE_EXIST) {
+		if(file.exists()) {
 			System.out.println(">>>Find your file : " + file.getName());
 			return file;
 		} else {

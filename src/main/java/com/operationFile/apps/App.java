@@ -12,15 +12,17 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
+import com.operationFile.model.Config;
 import com.opretaionFile.util.ReadFileUtil;
 
 public class App {
 
 	private ReadFileUtil instance;
+	private Config config;
 	
 	private void init() {
 		instance = ReadFileUtil.getInstance();
-		instance.readPropertiesFile();
+		config = instance.readPropertiesFile();
 	}
 	
 	public void run() {
@@ -33,8 +35,8 @@ public class App {
 		init();
 		
 		try {
-			dataFile = ReadFileUtil.findFile(instance.read_file_path);
-			mergeFile = ReadFileUtil.findFile(instance.result_file_path);
+			dataFile = ReadFileUtil.findFile(config.getReadFilePath());
+			mergeFile = ReadFileUtil.findFile(config.getResultFilePath());
 			
 			read = new FileInputStream(dataFile);
 			dataWorkbook = WorkbookFactory.create(read);

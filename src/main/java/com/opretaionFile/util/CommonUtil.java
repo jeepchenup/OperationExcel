@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -39,13 +40,22 @@ public class CommonUtil {
 			unreadSet = parseList(unReadRowSet);
 			Iterator<Row> rowsIterator = sheet.rowIterator();
 			Row row;
+			StringBuffer getInfo = new StringBuffer();
+			
 			while(rowsIterator.hasNext()) {
 				row = rowsIterator.next();
 				row.getRowNum();
+				
+				Cell cell;
 				if( !unreadSet.contains(row.getRowNum()) ) {
-					
+					cell = row.getCell(columnIdx);
+					getInfo.append(cell.getStringCellValue());
 				}
 			}
+			
+			read.close();
+			workbook.close();
+			
 			
 		} catch (EncryptedDocumentException e) {
 			e.printStackTrace();
