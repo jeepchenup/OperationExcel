@@ -3,19 +3,26 @@ package com.oprataionFile.util;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.operationFile.model.Config;
 import com.opretaionFile.util.CommonUtil;
 import com.opretaionFile.util.ReadFileUtil;
 
 public class TestCommonUtil {
 	
+	private ReadFileUtil instance;
+	private Config config;
+	
 	@Before
 	public void init() {
-		ReadFileUtil instance = ReadFileUtil.getInstance();
-		instance.readPropertiesFile();
+		instance = ReadFileUtil.getInstance();
+		config = instance.readPropertiesFile();
 	}
 	
 	@Test
 	public void testReadExcelRowToFile() {
-//		CommonUtil.readExcelRowToFile(columnIdx, filePath, unReadRowSet, sheetIdx);
+		CommonUtil.readExcelRowToFile(config.getReadColumnIndex(), 
+														   config.getReadFilePath(),
+														   config.getUnreadRowSet(), 
+														   config.getReadSheetIndex());
 	}
 }

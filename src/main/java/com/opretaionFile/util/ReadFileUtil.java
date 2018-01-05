@@ -25,6 +25,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import com.operationFile.constants.ConfigConstants;
 import com.operationFile.constants.UtilConstants;
+import com.operationFile.model.Config;
 
 /**
  * 
@@ -35,14 +36,16 @@ import com.operationFile.constants.UtilConstants;
 public class ReadFileUtil {
 
 	private static boolean IS_FILE_EXIST = false;
-	public String read_file_path;
-	public String result_file_path;
-	public String template_file_path;
+	private Config innerConfig;
+//	public String read_file_path;
+//	public String result_file_path;
+//	public String template_file_path;
 
-	public static int KEY_COLUMN_INDEX ;
-	public static int VALUE_COLUMN_INDEX ;
-	public static String UNREAD_ROW_SET;
-	public static int READ_COLUMN_INDEX;
+//	public static int KEY_COLUMN_INDEX ;
+//	public static int VALUE_COLUMN_INDEX ;
+//	public static String UNREAD_ROW_SET;
+//	public static int READ_COLUMN_INDEX;
+//	public static int READ_SHEET_INDEX;
 	
 	private static ReadFileUtil readFile;
 	private ReadFileUtil(){};
@@ -167,8 +170,8 @@ public class ReadFileUtil {
 				
 				row = (HSSFRow) rows.next();
 				
-				keyCell = row.getCell(KEY_COLUMN_INDEX);
-				valueCell = row.getCell(VALUE_COLUMN_INDEX);
+				keyCell = row.getCell(innerConfig.getKeyColumnIndex());
+				valueCell = row.getCell(innerConfig.getValueColumnIndex());
 				
 				key = keyCell.getStringCellValue();
 				
@@ -202,9 +205,9 @@ public class ReadFileUtil {
 		return sheetsDataInfoMap;
 	}
 	
-	public void readPropertiesFile() {
+	public Config readPropertiesFile() {
 		String propertiesFilePath = System.getProperty("user.dir") + ConfigConstants.CONFIGU_FILE_PATH;
-
+		Config configModel = new Config();
 		File config = findFile(propertiesFilePath);
 		
 		try {
@@ -216,19 +219,21 @@ public class ReadFileUtil {
 				while(iterator.hasNext()) {
 					String key = iterator.next();
 					if(ConfigConstants.READ_FILE_PATH.equals(key))
-						read_file_path = prop.getProperty(key);
+						configModel.setReadFilePath(prop.getProperty(key));
 					else if(ConfigConstants.RESULT_FILE_PATH.equals(key))
-						result_file_path = prop.getProperty(key);
+						configModel.setResultFilePath(prop.getProperty(key));
 					else if(ConfigConstants.TEMPLATE_FILE_PATH.equals(key))
-						template_file_path = prop.getProperty(key);
+						configModel.setTemplateFilePath(prop.getProperty(key));
 					else if(ConfigConstants.KEY_COLUMN_INDEX.equals(key))
-						KEY_COLUMN_INDEX = Integer.parseInt((String) prop.get(key));
+						configModel.setKeyColumnIndex(Integer.parseInt(prop.getProperty(key)));
 					else if(ConfigConstants.VALUE_COLUMN_INDEX.equals(key))
-						VALUE_COLUMN_INDEX = Integer.parseInt((String) prop.get(key));
+						configModel.setValueColumnIndex(Integer.parseInt(prop.getProperty(key)));
 					else if(ConfigConstants.UNREAD_ROW_SET.equals(key))
-						UNREAD_ROW_SET = prop.getProperty(key);
+						configModel.setUnreadRowSet(prop.getProperty(key));
 					else if(ConfigConstants.READ_COLUMN_INDEX.equals(key))
-						READ_COLUMN_INDEX = Integer.parseInt(prop.getProperty(key));
+						configModel.setReadColumnIndex(Integer.parseInt(prop.getProperty(key)));
+					else if(ConfigConstants.READ_SHEET_INDEX.equals(key))
+						configModel.setReadSheetIndex(Integer.parseInt(prop.getProperty(key)));
 				}
 			}
 			
@@ -237,6 +242,8 @@ public class ReadFileUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		this.innerConfig = configModel;
+		return configModel;
 	}
 	
 	public void copySheetAsTemplate(File mergeFile, Map<Integer, String> dataMap) {

@@ -12,6 +12,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.operationFile.model.Config;
 import com.opretaionFile.util.ReadFileUtil;
 
 public class TestReadFileUtil {
@@ -25,9 +26,10 @@ public class TestReadFileUtil {
 	public void setConfiguration() throws EncryptedDocumentException, InvalidFormatException, IOException {
 		instance = ReadFileUtil.getInstance();
 		instance.readPropertiesFile();
-		updateFile = ReadFileUtil.findFile(instance.result_file_path);
-		readFile = ReadFileUtil.findFile(instance.read_file_path);
-		templateFile = ReadFileUtil.findFile(instance.template_file_path);
+		Config config = instance.readPropertiesFile();
+		updateFile = ReadFileUtil.findFile(config.getResultFilePath());
+		readFile = ReadFileUtil.findFile(config.getReadFilePath());
+		templateFile = ReadFileUtil.findFile(config.getTemplateFilePath());
 	}
 
 	@Test
