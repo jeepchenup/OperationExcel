@@ -24,7 +24,14 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import com.operationFile.constants.ConfigConstants;
+import com.operationFile.constants.UtilConstants;
 
+/**
+ * 
+ * @author steven.chen
+ * @version 0.1
+ *
+ */
 public class ReadFileUtil {
 
 	private static boolean IS_FILE_EXIST = false;
@@ -34,8 +41,6 @@ public class ReadFileUtil {
 
 	public static int KEY_COLUMN_INDEX ;
 	public static int VALUE_COLUMN_INDEX ;
-	public static final String KEY_STRING = "KEY";
-	public static final String VALUE_STRING = "VALUE";
 	
 	private static ReadFileUtil readFile;
 	private ReadFileUtil(){};
@@ -67,29 +72,50 @@ public class ReadFileUtil {
 		return isEmpty;
 	}
 	
-	public void updateXLSFile(File file, Map<String, Map<Integer, String>> maps) throws EncryptedDocumentException, InvalidFormatException, IOException{
+	public void updateXLSFile(File file, Map<String, Map<Integer, String>> maps) {
 		
 		FileInputStream read = null;
 		FileOutputStream out = null;
 		Workbook workbook = null;
 		
-		read = new FileInputStream(file);
+		try {
+			read = new FileInputStream(file);
+			
+			workbook = WorkbookFactory.create(read);
+			read.close();
+			
+			if(maps != null) {
+				//Loop through the maps
+				Iterator<String> mapsIterator = maps.keySet().iterator();
+				while(mapsIterator.hasNext()) {
+					Map<Integer, String> mapInfo = maps.get(mapsIterator.next());
+					
+					//TODO insert maps which in the maps to result file
+					
+				}
+			}
+			Sheet sheet = workbook.createSheet("sample sheet2");
+			
+			Row row = sheet.createRow(1);
+			Cell cell1 = row.createCell(2);
+			Cell cell2 = row.createCell(3);
+			cell1.setCellValue("v1");
+			cell2.setCellValue("v2");
+			
+			out = new FileOutputStream(file);
+			workbook.write(out);
+			workbook.close();
+			out.close();
+		} catch (EncryptedDocumentException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (InvalidFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		workbook = WorkbookFactory.create(read);
-		read.close();
-		
-		Sheet sheet = workbook.createSheet("sample sheet2");
-		
-		Row row = sheet.createRow(1);
-		Cell cell1 = row.createCell(2);
-		Cell cell2 = row.createCell(3);
-		cell1.setCellValue("v1");
-		cell2.setCellValue("v2");
-		
-		out = new FileOutputStream(file);
-		workbook.write(out);
-		workbook.close();
-		out.close();
 	}
 	
 	public Map<Integer, String> getSheetInfoOfWorkbook(Workbook workbook) {
@@ -157,7 +183,7 @@ public class ReadFileUtil {
 				}
 				
 				if(isValueCellEmpty || null == valueCell) {
-					sheetDataMap.put(key, ConfigConstants.EMPTY_VALUE);
+					sheetDataMap.put(key, UtilConstants.EMPTY_VALUE);
 //					System.out.println(key + " " + EMPTY_VALUE);
 				} else {
 					sheetDataMap.put(key, value);
@@ -226,7 +252,7 @@ public class ReadFileUtil {
 			while(iterator.hasNext()) {
 				sheetEntry = iterator.next();
 				workbook.cloneSheet(ConfigConstants.TEMPALTE_SHEET_INDEX);
-				sheetName = ConfigConstants.PRE_SHEET_NAME + sheetEntry.getValue();
+				sheetName = UtilConstants.PRE_SHEET_NAME + sheetEntry.getValue();
 				workbook.setSheetName(sheetEntry.getKey() + 1, sheetName);
 				
 				System.out.println(">>>copy finish :  sheet index: " + sheetEntry.getKey()  + " - [" + sheetName + "]");
