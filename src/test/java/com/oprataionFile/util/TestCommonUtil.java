@@ -21,8 +21,10 @@ public class TestCommonUtil {
 	@Test
 	public void testReadExcelRowToFile() {
 		CommonUtil.readExcelRowToFile(config.getReadColumnIndex(), 
-														   config.getReadFilePath(),
-														   config.getUnreadRowSet(), 
-														   config.getReadSheetIndex());
+								      config.getTemplateFilePath(),
+								      config.getUnreadRowSet(), 
+								      config.getReadSheetIndex(),
+								      config.getStartReadRowIndex(),
+								      config.getEndReadRowIndex());
 	}
 }

@@ -17,6 +17,10 @@ public class Config {
 	private int readColumnIndex;
 	
 	private int readSheetIndex;
+	
+	private int startReadRowIndex;
+	
+	private int endReadRowIndex;
 
 	public String getReadFilePath() {
 		return readFilePath;
@@ -80,6 +84,22 @@ public class Config {
 
 	public void setReadSheetIndex(int readSheetIndex) {
 		this.readSheetIndex = readSheetIndex;
+	}
+
+	public int getStartReadRowIndex() {
+		return startReadRowIndex;
+	}
+
+	public void setStartReadRowIndex(int startReadRowIndex) {
+		this.startReadRowIndex = startReadRowIndex;
+	}
+
+	public int getEndReadRowIndex() {
+		return endReadRowIndex;
+	}
+
+	public void setEndReadRowIndex(int endReadRowIndex) {
+		this.endReadRowIndex = endReadRowIndex;
 	}
 	
 }

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,6 +18,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
+import com.operationFile.constants.UtilConstants;
+
 public class CommonUtil {
 
 	/**
@@ -25,8 +28,10 @@ public class CommonUtil {
 	 * @param filePath 读取文件路径
 	 * @param unReadRowSet 不读取行数集合
 	 * @param sheetIdx 指定读取sheet, 开始为0
+	 * @param startRowIdx 开始读取的行数
+	 * @param endRowIdx 结束读取的行数
 	 */
-	public static void readExcelRowToFile(int columnIdx, String filePath, String unReadRowSet, int sheetIdx) {
+	public static void readExcelRowToFile(int columnIdx, String filePath, String unReadRowSet, int sheetIdx, int startRowIdx, int endRowIdx) {
 		File file = ReadFileUtil.findFile(filePath);
 		FileInputStream read = null;
 		FileOutputStream out = null;
@@ -41,17 +46,16 @@ public class CommonUtil {
 			Iterator<Row> rowsIterator = sheet.rowIterator();
 			Row row;
 			StringBuffer getInfo = new StringBuffer();
-			
 			while(rowsIterator.hasNext()) {
 				row = rowsIterator.next();
-				row.getRowNum();
-				
-				Cell cell;
-				if( !unreadSet.contains(row.getRowNum()) ) {
-					cell = row.getCell(columnIdx);
-					getInfo.append(cell.getStringCellValue());
+				int currentRowIdx = row.getRowNum();
+				if( !unreadSet.contains(currentRowIdx) && currentRowIdx >= startRowIdx && currentRowIdx <= endRowIdx) {
+					getInfo.append(row.getCell(columnIdx).getStringCellValue())
+						   .append(UtilConstants.NEW_LINE_CHAR);
+					if(currentRowIdx == endRowIdx) break;
 				}
 			}
+			
 			
 			read.close();
 			workbook.close();
@@ -71,7 +75,7 @@ public class CommonUtil {
 	
 	/**
 	 * 获取不能读取行数的List
-	 * @param setStr 不能读取字符串
+	 * @param setStr 不能读取的字符串集合。例如："1,2,3"
 	 * @return
 	 */
 	private static List<Integer> parseList(String setStr) {

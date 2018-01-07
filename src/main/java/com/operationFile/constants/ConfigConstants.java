@@ -21,4 +21,10 @@ public class ConfigConstants {
 	public static final String READ_COLUMN_INDEX = "read_column_index";
 	
 	public static final String READ_SHEET_INDEX = "read_sheet_index";
+	
+	public static final String START_READ_ROW_INDEX = "start_read_row_index";
+	
+	public static final String END_READ_ROW_INDEX = "end_read_row_index";
+	
+	public static final String OUTPUT_FILE_PATH = "/output/";
 }
