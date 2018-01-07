@@ -27,4 +27,8 @@ public class ConfigConstants {
 	public static final String END_READ_ROW_INDEX = "end_read_row_index";
 	
 	public static final String OUTPUT_FILE_PATH = "/output/";
+	
+	public static final String TXT_TYPE = ".txt";
+	
+	public static final String DASH = "-";
 }

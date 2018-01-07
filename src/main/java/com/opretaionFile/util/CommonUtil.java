@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -17,7 +19,9 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.util.SystemOutLogger;
 
+import com.operationFile.constants.ConfigConstants;
 import com.operationFile.constants.UtilConstants;
 
 public class CommonUtil {
@@ -55,11 +59,21 @@ public class CommonUtil {
 					if(currentRowIdx == endRowIdx) break;
 				}
 			}
-			
-			
 			read.close();
 			workbook.close();
 			
+			StringBuffer outputFileName = new StringBuffer();
+			StringBuffer outputFilePath = new StringBuffer();
+			
+			outputFileName.append(formatDate(Calendar.getInstance().getTime()))
+						  .append(ConfigConstants.DASH)
+						  .append(file.getName().split("\\.")[0])
+						  .append(ConfigConstants.TXT_TYPE);
+			outputFilePath.append(System.getProperty("user.dir"))
+						  .append(ConfigConstants.OUTPUT_FILE_PATH)
+						  .append(outputFileName);
+			System.out.println(outputFilePath);
+			File outputFile = new File(outputFilePath.toString());
 			
 		} catch (EncryptedDocumentException e) {
 			e.printStackTrace();
@@ -71,6 +85,11 @@ public class CommonUtil {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public static String formatDate(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(date);
 	}
 	
 	/**
@@ -86,4 +105,5 @@ public class CommonUtil {
 		}
 		return list;
 	}
+	
 }
