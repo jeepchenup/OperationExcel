@@ -72,8 +72,16 @@ public class CommonUtil {
 			outputFilePath.append(System.getProperty("user.dir"))
 						  .append(ConfigConstants.OUTPUT_FILE_PATH)
 						  .append(outputFileName);
-			System.out.println(outputFilePath);
+			
 			File outputFile = new File(outputFilePath.toString());
+			if(!outputFile.exists())  {
+				outputFile.getParentFile().mkdir();
+				outputFile.createNewFile();
+			}
+			out = new FileOutputStream(outputFile);
+			out.write(getInfo.toString().getBytes());
+			out.flush();
+			out.close();
 			
 		} catch (EncryptedDocumentException e) {
 			e.printStackTrace();
