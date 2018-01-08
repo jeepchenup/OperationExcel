@@ -225,6 +225,8 @@ public class ReadFileUtil {
 						configModel.setStartReadRowIndex(Integer.parseInt(prop.getProperty(key)));
 					else if(ConfigConstants.END_READ_ROW_INDEX.equals(key))
 						configModel.setEndReadRowIndex(Integer.parseInt(prop.getProperty(key)));
+					else if(ConfigConstants.INSERT_COLUMN_INDEX.equals(key))
+						configModel.setInsertColumnIndex(Integer.parseInt(prop.getProperty(key)));
 				}
 			}
 			

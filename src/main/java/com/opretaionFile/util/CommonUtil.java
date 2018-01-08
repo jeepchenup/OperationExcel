@@ -55,7 +55,7 @@ public class CommonUtil {
 				int currentRowIdx = row.getRowNum();
 				if( !unreadSet.contains(currentRowIdx) && currentRowIdx >= startRowIdx && currentRowIdx <= endRowIdx) {
 					getInfo.append(row.getCell(columnIdx).getStringCellValue())
-						   .append(UtilConstants.NEW_LINE_CHAR);
+						   	   .append(UtilConstants.NEW_LINE_CHAR);
 					if(currentRowIdx == endRowIdx) break;
 				}
 			}

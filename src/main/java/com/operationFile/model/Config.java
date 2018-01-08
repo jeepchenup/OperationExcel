@@ -21,6 +21,8 @@ public class Config {
 	private int startReadRowIndex;
 	
 	private int endReadRowIndex;
+	
+	private int insertColumnIndex;
 
 	public String getReadFilePath() {
 		return readFilePath;
@@ -100,6 +102,14 @@ public class Config {
 
 	public void setEndReadRowIndex(int endReadRowIndex) {
 		this.endReadRowIndex = endReadRowIndex;
+	}
+
+	public int getInsertColumnIndex() {
+		return insertColumnIndex;
+	}
+
+	public void setInsertColumnIndex(int insertColumnIndex) {
+		this.insertColumnIndex = insertColumnIndex;
 	}
 	
 }

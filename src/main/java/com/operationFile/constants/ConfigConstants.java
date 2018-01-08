@@ -31,4 +31,6 @@ public class ConfigConstants {
 	public static final String TXT_TYPE = ".txt";
 	
 	public static final String DASH = "-";
+	
+	public static final String INSERT_COLUMN_INDEX = "insert_column_index";
 }
