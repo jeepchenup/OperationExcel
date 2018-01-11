@@ -8,3 +8,5 @@ Batch processing excels.
 	- TODO copy compare info output to specify files
 - 2018-1-8 
 	- finish copy compare info & add new ignore folders
+- 2018-1-11
+	- TODO log4j replace system out. [Configuration Manual](https://logging.apache.org/log4j/2.x/manual/configuration.html)
