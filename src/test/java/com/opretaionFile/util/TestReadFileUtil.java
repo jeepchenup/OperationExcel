@@ -1,4 +1,4 @@
-package com.oprataionFile.util;
+package com.opretaionFile.util;
 
 import java.io.File;
 import java.io.FileInputStream;

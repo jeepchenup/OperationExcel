@@ -1,4 +1,4 @@
-package com.oprataionFile.util;
+package com.opretaionFile.util;
 
 import org.junit.Before;
 import org.junit.Test;
