@@ -1,4 +1,4 @@
-package com.operationFile.model;
+package com.operateFile.model;
 
 public class Config {
 

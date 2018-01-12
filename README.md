@@ -10,3 +10,4 @@ Batch processing excels.
 	- finish copy compare info & add new ignore folders
 - 2018-1-11
 	- TODO log4j replace system out. [Configuration Manual](https://logging.apache.org/log4j/2.x/manual/configuration.html)
+	- copy log4j.properties to /OperationExcel/target/classes/

@@ -1,11 +1,11 @@
-package com.opretaionFile.util;
+package com.operateFile.util;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.operationFile.model.Config;
-import com.opretaionFile.util.CommonUtil;
-import com.opretaionFile.util.ReadFileUtil;
+import com.operateFile.model.Config;
+import com.operateFile.util.CommonUtil;
+import com.operateFile.util.ReadFileUtil;
 
 public class TestCommonUtil {
 	

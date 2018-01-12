@@ -1,4 +1,4 @@
-package com.opretaionFile.util;
+package com.operateFile.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,8 +12,8 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.operationFile.model.Config;
-import com.opretaionFile.util.ReadFileUtil;
+import com.operateFile.model.Config;
+import com.operateFile.util.ReadFileUtil;
 
 public class TestReadFileUtil {
 

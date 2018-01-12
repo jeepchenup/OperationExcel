@@ -1,4 +1,4 @@
-package com.opretaionFile.util;
+package com.operateFile.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,20 +12,22 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.util.SystemOutLogger;
 
-import com.operationFile.constants.ConfigConstants;
-import com.operationFile.constants.UtilConstants;
+import com.operateFile.constants.ConfigConstants;
+import com.operateFile.constants.UtilConstants;
 
 public class CommonUtil {
 
+	public static final Logger logger = LogManager.getLogger(CommonUtil.class);
+	
 	/**
 	 * 通过指定的列数，获取Excel数据
 	 * @param columnIdx 指定读取列数
