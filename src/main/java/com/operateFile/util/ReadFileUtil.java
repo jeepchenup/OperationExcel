@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -46,13 +48,15 @@ public class ReadFileUtil {
 		return readFile;
 	}
 	
+	public static final Logger logger = LogManager.getLogger(ReadFileUtil.class);
+	
 	public static File findFile(String path) {
 		File file = new File(path);
 		if(file.exists()) {
-			System.out.println(">>>Find your file : " + file.getName());
+			logger.info("Find your file : " + file.getName());
 			return file;
 		} else {
-			System.out.println(">>>Can not find the file : " +  file.getName() + "\n>>>Please reconfirm the file path!");
+			logger.info("Can not find the file : " +  file.getName() + "\nPlease reconfirm the file path!");
 			return null;
 		}
 	}
@@ -183,7 +187,7 @@ public class ReadFileUtil {
 				}
 			}
 			sheetsDataInfoMap.put(sheetsNameInfoMap.get(sheetIdx), sheetDataMap);
-			System.out.println("Getted sheet : " + sheetsNameInfoMap.get(sheetIdx));
+			logger.info("Getted sheet : " + sheetsNameInfoMap.get(sheetIdx));
 		}
 		
 		workbook.close();
@@ -261,14 +265,14 @@ public class ReadFileUtil {
 				sheetName = UtilConstants.PRE_SHEET_NAME + sheetEntry.getValue();
 				workbook.setSheetName(sheetEntry.getKey() + 1, sheetName);
 				
-				System.out.println(">>>copy finish :  sheet index: " + sheetEntry.getKey()  + " - [" + sheetName + "]");
+				logger.info(">>>copy finish :  sheet index: " + sheetEntry.getKey()  + " - [" + sheetName + "]");
 			}
 			out = new FileOutputStream(mergeFile);
 			workbook.write(out);
 			workbook.close();
 			out.close();
 			
-			System.out.println("\n>>>finish copy!");
+			logger.info("\n>>>finish copy!");
 		} catch (EncryptedDocumentException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
